@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda - The Nova Club</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <nav class="main-nav">
+                <ul class="nav-left">
+                    <li><a href="index.html"><img src="img/logo.png" alt="Logo The Nova Club" class="nav-logo"></a></li>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="tienda.html">Tienda</a></li>
+                    <li><a href="#">Ayuda</a></li>
+                </ul>
+            </nav>
+
+            <nav class="icon-nav">
+                <ul class="nav-right">
+                    <li class="search-container">
+                        <a href="#" class="search-link"><span class="material-icons">search</span></a>
+                        <input type="text" id="search-input" class="search-input" placeholder="Buscar productos...">
+                    </li>
+                    <li class="dropdown-container">
+                        <a href="#" class="profile-link"><span class="material-icons">person</span></a>
+                        <div class="dropdown-menu">
+                            <a href="#" id="open-login-btn">Iniciar Sesión</a>
+                            <a href="#" id="show-register-from-menu">Crear Perfil</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#" id="open-cart-btn" class="cart-icon-container">
+                            <span class="material-icons">shopping_bag</span>
+                            <span id="cart-count" class="cart-count">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="tienda-container">
+        <aside class="sidebar-filtros">
+            <h2>Filtros</h2>
+            <div class="filtro-categoria">
+                <h3>Categoría</h3>
+                <ul>
+                    <li><label><input type="checkbox" class="categoria-filter" value="Polerones"> Polerones</label></li>
+                    <li><label><input type="checkbox" class="categoria-filter" value="Poleras"> Poleras</label></li>
+                    <li><label><input type="checkbox" class="categoria-filter" value="Gorras"> Gorras</label></li>
+                    <li><label><input type="checkbox" class="categoria-filter" value="Buzos"> Buzos</label></li>
+                </ul>
+            </div>
+            <div class="filtro-precio">
+                <h3>Precio</h3>
+                <div class="precio-inputs">
+                    <input type="number" id="precio-min" placeholder="Mínimo" min="0">
+                    <input type="number" id="precio-max" placeholder="Máximo" min="0">
+                </div>
+                <button class="button" id="aplicar-filtro-btn">Aplicar Filtros</button>
+            </div>
+        </aside>
+
+        <div class="productos-tienda-grid">
+            <h2>Todos los Productos</h2>
+            <div id="productos-grid-tienda" class="product-grid">
+            </div>
+        </div>
+    </main>
+
+    <div id="cart-sidebar" class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Tu Carrito</h3>
+            <button id="close-cart-btn" class="close-btn">&times;</button>
+        </div>
+        <div id="cart-items" class="cart-items">
+            <p id="empty-cart-message" class="empty-cart-message" style="display: none;">Tu carrito está vacío.</p>
+        </div>
+        <div class="cart-summary">
+            <div class="discount-section">
+                <input type="text" id="discount-code" placeholder="Código de descuento">
+                <button id="apply-discount-btn" class="button">Aplicar</button>
+            </div>
+            <p>Total: <span id="cart-total">$0.00</span></p>
+            <button id="checkout-btn" class="checkout-btn button">Pagar</button>
+        </div>
+    </div>
+
+    <div id="checkout-modal" class="modal-bg" style="display: none;">
+        <div class="modal-content">
+            <h2>¡Compra Exitosa!</h2>
+            <p>Tu pedido ha sido procesado correctamente. ¡Gracias por tu compra!</p>
+            <button id="close-checkout-modal-btn" class="button button-secondary">Cerrar</button>
+        </div>
+    </div>
+
+    <div id="login-modal" class="modal-bg" style="display: none;">
+        <div class="modal-content">
+            <button id="close-login-modal-btn" class="close-btn">&times;</button>
+            <div id="login-section">
+                <h3>Iniciar Sesión</h3>
+                <form id="login-form">
+                    <label for="user-login">Usuario:</label>
+                    <input type="text" id="user-login" required>
+                    <label for="pass-login">Contraseña:</label>
+                    <input type="password" id="pass-login" required>
+                    <button type="submit" class="button">Entrar</button>
+                </form>
+                <p>¿No tienes cuenta? <a href="#" id="show-register">Crea una aquí</a></p>
+                <p>¿Olvidaste tu contraseña? <a href="#" id="show-forgot-pass">Recupérala aquí</a></p>
+            </div>
+
+            <div id="register-section" style="display: none;">
+                <h3>Crear Cuenta</h3>
+                <form id="register-form">
+                    <label for="new-user">Usuario:</label>
+                    <input type="text" id="new-user" required>
+                    <label for="new-email">Correo:</label>
+                    <input type="email" id="new-email" required>
+                    <label for="new-pass">Clave:</label>
+                    <input type="password" id="new-pass" required>
+                    <label for="confirm-pass">Verificar Clave:</label>
+                    <input type="password" id="confirm-pass" required>
+                    <button type="submit" class="button">Crear Cuenta</button>
+                </form>
+                <p>¿Ya tienes cuenta? <a href="#" id="show-login">Inicia sesión</a></p>
+            </div>
+
+            <div id="forgot-pass-section" style="display: none;">
+                <h3>Recuperar Contraseña</h3>
+                <form id="forgot-pass-form">
+                    <p>Ingresa el correo con el que te registraste para obtener una contraseña provisoria.</p>
+                    <label for="forgot-email">Correo:</label>
+                    <input type="email" id="forgot-email" required>
+                    <button type="submit" class="button">Recuperar</button>
+                </form>
+                <p>¿Ya tienes una clave? <a href="#" id="show-login-forgot">Inicia sesión</a></p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 The Nova Club. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="js/scripts.js"></script>
+</body>
+</html>

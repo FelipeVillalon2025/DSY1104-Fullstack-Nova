@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Nova Club - Panel de Administración</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <nav class="main-nav">
+                <ul class="nav-left">
+                    <li><a href="index.html"><img src="img/logo.png" alt="Logo The Nova Club" class="nav-logo"></a></li>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="tienda.html">Tienda</a></li>
+                    <li><a href="#">Ayuda</a></li>
+                </ul>
+            </nav>
+
+            <nav class="icon-nav">
+                <ul class="nav-right">
+                    <li class="search-container">
+                        <a href="#" class="search-link"><span class="material-icons">search</span></a>
+                        <input type="text" id="search-input" class="search-input" placeholder="Buscar productos...">
+                    </li>
+                    <li class="dropdown-container">
+                        <a href="#" class="profile-link"><span class="material-icons">person</span></a>
+                        <div class="dropdown-menu">
+                            <a href="#" id="open-login-btn">Iniciar Sesión</a>
+                            <a href="#" id="show-register-from-menu">Crear Perfil</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#" id="open-cart-btn" class="cart-icon-container">
+                            <span class="material-icons">shopping_bag</span>
+                            <span id="cart-count" class="cart-count">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="admin-panel">
+        <aside>
+            <h1 class="logo">FullTienda Admin</h1>
+            <nav>
+                <ul>
+                    <li><a href="#dashboard" class="active">Dashboard</a></li>
+                    <li><a href="#gestion-productos">Gestión de Productos</a></li>
+                    <li><a href="#gestion-usuarios">Gestión de Usuarios</a></li>
+                    <li><a href="#reportes">Reportes</a></li>
+                </ul>
+            </nav>
+            <a href="#" id="logout-link" class="logout-btn">Cerrar Sesión</a>
+        </aside>
+
+        <main class="dashboard">
+            <header>
+                <h2>Bienvenido, Administrador</h2>
+            </header>
+
+            <div id="dashboard" class="content-card">
+                <h2>Dashboard Principal</h2>
+                <p>Usa la barra lateral para navegar y gestionar tu tienda.</p>
+                <div class="dashboard-grid">
+                    <div class="summary-card">
+                        <h3>Ventas Totales</h3>
+                        <p id="total-ventas">$0.00</p>
+                    </div>
+                    <div class="summary-card">
+                        <h3>Clientes con Compra</h3>
+                        <p id="clientes-activos">0</p>
+                    </div>
+                    <div class="summary-card">
+                        <h3>Productos Vendidos</h3>
+                        <p id="productos-vendidos">0</p>
+                    </div>
+                    <div class="summary-card">
+                        <h3>Usuarios Registrados</h3>
+                        <p id="total-usuarios">0</p>
+                    </div>
+                </div>
+                <button id="reset-dashboard-btn" class="button button-danger" style="margin-top: 20px;">Restablecer Datos del Dashboard</button>
+            </div>
+
+            <div id="gestion-productos" class="content-card" style="display: none;">
+                <h2>Gestión de Productos</h2>
+                <form id="productoForm">
+                    <input type="text" id="nombre-producto" placeholder="Nombre del producto" required>
+                    <select id="categoria-producto" required>
+                        <option value="">Seleccione una categoría</option>
+                        <option value="Polerones">Polerones</option>
+                        <option value="Poleras">Poleras</option>
+                        <option value="Gorras">Gorras</option>
+                        <option value="Buzos">Buzos</option>
+                    </select>
+                    <input type="text" id="descripcion-producto" placeholder="Descripción del producto" required>
+                    <input type="number" id="precio-producto" placeholder="Precio" step="0.01" required>
+                    <input type="number" id="stock-producto" placeholder="Stock" required>
+                    <input type="text" id="imagen-producto" placeholder="Ruta de la imagen (ej: img/camiseta.jpg)" required>
+                    <button type="submit">Guardar Producto</button>
+                </form>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Imagen</th>
+                            <th>Nombre</th>
+                            <th>Categoría</th>
+                            <th>Precio</th>
+                            <th>Stock</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lista-productos">
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="gestion-usuarios" class="content-card" style="display: none;">
+                <h2>Gestión de Usuarios</h2>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Usuario</th>
+                            <th>Correo</th>
+                            <th>Ha Comprado?</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lista-usuarios">
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="reportes" class="content-card" style="display: none;">
+                <h2>Reportes</h2>
+                <div class="report-card content-card">
+                    <h3>Resumen de Ventas (Datos simulados)</h3>
+                    <p><strong>Ventas Totales:</strong> <span id="ventas-totales">$0.00</span></p>
+                    <p><strong>Órdenes Concretadas:</strong> <span id="ordenes-concretadas">0</span></p>
+                    <div style="height: 100px; display: flex; gap: 5px; align-items: flex-end;">
+                        <div style="width: 14%; background-color: #007bff; height: 50px;" title="Lunes"></div>
+                        <div style="width: 14%; background-color: #007bff; height: 80px;" title="Martes"></div>
+                        <div style="width: 14%; background-color: #007bff; height: 60px;" title="Miércoles"></div>
+                        <div style="width: 14%; background-color: #007bff; height: 90px;" title="Jueves"></div>
+                        <div style="width: 14%; background-color: #007bff; height: 75px;" title="Viernes"></div>
+                        <div style="width: 14%; background-color: #007bff; height: 100px;" title="Sábado"></div>
+                        <div style="width: 14%; background-color: #007bff; height: 95px;" title="Domingo"></div>
+                    </div>
+                </div>
+
+                <div class="report-card content-card">
+                    <h3>Productos con Bajo Stock</h3>
+                    <ul id="lista-bajo-stock">
+                    </ul>
+                </div>
+
+                <div class="report-card content-card">
+                    <h3>Productos Más Populares</h3>
+                    <ul id="lista-populares">
+                    </ul>
+                </div>
+
+                <div class="report-card content-card">
+                    <h3>Historial de Ventas</h3>
+                    <table class="report-table">
+                        <thead>
+                            <tr>
+                                <th>ID Orden</th>
+                                <th>Usuario</th>
+                                <th>Fecha</th>
+                                <th>Productos</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody id="historial-ventas">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="login-modal" class="modal-bg" style="display: none;">
+        <div class="modal-content">
+            <button id="close-login-modal-btn" class="close-btn">&times;</button>
+            <div id="login-section">
+                <h3>Iniciar Sesión</h3>
+                <form id="login-form">
+                    <label for="user-login">Usuario:</label>
+                    <input type="text" id="user-login" required>
+                    <label for="pass-login">Contraseña:</label>
+                    <input type="password" id="pass-login" required>
+                    <button type="submit" class="button">Entrar</button>
+                </form>
+                <p>¿No tienes cuenta? <a href="#" id="show-register">Crea una aquí</a></p>
+                <p>¿Olvidaste tu contraseña? <a href="#" id="show-forgot-pass">Recupérala aquí</a></p>
+            </div>
+            
+            <div id="register-section" style="display: none;">
+                <h3>Crear Cuenta</h3>
+                <form id="register-form">
+                    <label for="new-user">Usuario:</label>
+                    <input type="text" id="new-user" required>
+                    <label for="new-email">Correo:</label>
+                    <input type="email" id="new-email" required>
+                    <label for="new-pass">Clave:</label>
+                    <input type="password" id="new-pass" required>
+                    <label for="confirm-pass">Verificar Clave:</label>
+                    <input type="password" id="confirm-pass" required>
+                    <button type="submit" class="button">Crear Cuenta</button>
+                </form>
+                <p>¿Ya tienes cuenta? <a href="#" id="show-login">Inicia sesión</a></p>
+            </div>
+            
+            <div id="forgot-pass-section" style="display: none;">
+                <h3>Recuperar Contraseña</h3>
+                <form id="forgot-pass-form">
+                    <p>Ingresa el correo con el que te registraste para obtener una contraseña provisoria.</p>
+                    <label for="forgot-email">Correo:</label>
+                    <input type="email" id="forgot-email" required>
+                    <button type="submit" class="button">Recuperar</button>
+                </form>
+                <p>¿Ya tienes una clave? <a href="#" id="show-login-forgot">Inicia sesión</a></p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/scripts.js"></script>
+</body>
+</html>
